@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400&family=Syne:wght@700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Backgrounds */
+    --bg-void: #0D1117;
+    --bg-surface: #161B22;
+    --bg-elevated: #1C2128;
+
+    /* Fungal Network */
+    --mycelium-thread: #1A3320;
+    --mycelium-dim: #243D2A;
+    --mycelium-glow: #39D353;
+    --mycelium-bright: #5FE876;
+    --spore-particle: #2EA84388;
+
+    /* Neural / Interaction */
+    --synapse-fire: #E8C547;
+    --synapse-dim: #8B6914;
+    --synapse-bright: #F5D76E;
+
+    /* Typography */
+    --text-primary: #E6EDF3;
+    --text-secondary: #8B949E;
+    --text-muted: #484F58;
+    --text-link: #39D353;
+
+    /* UI Chrome */
+    --border-subtle: #21262D;
+    --border-active: #39D35344;
+    --node-rest: #161B22;
+    --node-hover: #1C2128;
+
+    /* shadcn/ui compatibility */
+    --background: 220 13% 5%;
+    --foreground: 213 27% 94%;
+    --card: 220 13% 9%;
+    --card-foreground: 213 27% 94%;
+    --popover: 220 13% 9%;
+    --popover-foreground: 213 27% 94%;
+    --primary: 137 64% 58%;
+    --primary-foreground: 220 13% 5%;
+    --secondary: 220 13% 12%;
+    --secondary-foreground: 213 27% 94%;
+    --muted: 220 13% 12%;
+    --muted-foreground: 215 9% 58%;
+    --accent: 220 13% 12%;
+    --accent-foreground: 213 27% 94%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 213 27% 94%;
+    --border: 220 13% 15%;
+    --input: 220 13% 15%;
+    --ring: 137 64% 58%;
+    --radius: 0.75rem;
+    --sidebar-background: 220 13% 5%;
+    --sidebar-foreground: 213 27% 94%;
+    --sidebar-primary: 137 64% 58%;
+    --sidebar-primary-foreground: 220 13% 5%;
+    --sidebar-accent: 220 13% 12%;
+    --sidebar-accent-foreground: 213 27% 94%;
+    --sidebar-border: 220 13% 15%;
+    --sidebar-ring: 137 64% 58%;
+  }
+
+  * {
+    @apply border-border-subtle;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-void);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/background.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.05;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  ::selection {
+    background-color: rgba(57, 211, 83, 0.25);
+    color: var(--text-primary);
+  }
+}
+
+@layer components {
+  /* Prose styles for MDX content */
+  .prose-mycelium {
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 100%;
+  }
+
+  .prose-mycelium h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose-mycelium h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--mycelium-glow);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-mycelium p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+  }
+
+  .prose-mycelium strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .prose-mycelium code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: var(--mycelium-glow);
+  }
+
+  .prose-mycelium ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .prose-mycelium ul li::before {
+    content: "→";
+    color: var(--mycelium-glow);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    margin-right: 10px;
+  }
+
+  .prose-mycelium ul li {
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .prose-mycelium a {
+    color: var(--mycelium-glow);
+    text-decoration: none;
+    border-bottom: 1px solid #39D35340;
+    transition: border-color 200ms;
+  }
+
+  .prose-mycelium a:hover {
+    border-bottom-color: var(--mycelium-glow);
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--mycelium-thread);
+    border-radius: 1px;
+  }
+
+  /* Floating label styles */
+  .floating-label-group {
+    position: relative;
+  }
+
+  .floating-label-group input:focus ~ label,
+  .floating-label-group input:not(:placeholder-shown) ~ label,
+  .floating-label-group textarea:focus ~ label,
+  .floating-label-group textarea:not(:placeholder-shown) ~ label {
+    transform: translateY(-24px) scale(0.85);
+    color: var(--mycelium-glow);
+  }
+
+  .floating-label-group label {
+    position: absolute;
+    left: 16px;
+    top: 12px;
+    color: var(--text-muted);
+    font-size: 14px;
+    transition: all 200ms ease;
+    pointer-events: none;
+    transform-origin: left;
+  }
+
+  @keyframes bioluminescent-glow {
+    0%, 100% {
+      box-shadow: 0 0 15px rgba(57, 211, 83, 0.15), 0 0 30px rgba(57, 211, 83, 0.05);
+      border-color: rgba(57, 211, 83, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 25px rgba(57, 211, 83, 0.3), 0 0 50px rgba(57, 211, 83, 0.15);
+      border-color: rgba(57, 211, 83, 0.6);
+    }
+  }
+
+  .hover-bioluminescent:hover {
+    animation: bioluminescent-glow 2s infinite ease-in-out;
+  }
+
+  @keyframes neural-fire-glow {
+    0%, 100% {
+      box-shadow: 0 0 15px rgba(232, 197, 71, 0.2), 0 0 30px rgba(232, 197, 71, 0.1);
+      border-color: rgba(232, 197, 71, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 25px rgba(232, 197, 71, 0.4), 0 0 50px rgba(232, 197, 71, 0.2);
+      border-color: rgba(232, 197, 71, 0.8);
+    }
+  }
+
+  .hover-neural:hover {
+    animation: neural-fire-glow 1.5s infinite ease-in-out;
+  }
+
+  @keyframes synapse-fire {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  .hit-neural-fire {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+    background: radial-gradient(circle, rgba(232,197,71,0.8) 0%, rgba(232,197,71,0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: synapse-fire 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  }
+}
+
+

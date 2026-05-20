@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "parse-kb": "node scripts/parseKnowledgeBase.js",
+    "build": "node scripts/parseKnowledgeBase.js && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

@@ -1,6 +1,5 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import SkillGraph from '@/components/ui/SkillGraph';
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -25,6 +24,99 @@ const stats = [
   { number: '5+', label: 'Projects', sublabel: 'Shipped' },
   { number: 'B.Tech CSE', label: '2025', sublabel: 'Graduate' },
 ];
+
+const TerminalView = () => {
+  const [activeTab, setActiveTab] = useState<'identity' | 'philosophy' | 'interests'>('identity');
+
+  return (
+    <div className="w-full h-full flex flex-col font-mono text-xs rounded-xl overflow-hidden border" style={{ borderColor: '#21262D', backgroundColor: 'rgba(13, 17, 23, 0.4)' }}>
+      {/* Terminal Title Bar */}
+      <div className="flex items-center justify-between px-4 py-3 bg-[#161B22] border-b" style={{ borderColor: '#21262D' }}>
+        <div className="flex items-center gap-2">
+          <span className="w-3.5 h-3.5 rounded-full bg-[#FF5F56]" />
+          <span className="w-3.5 h-3.5 rounded-full bg-[#FFBD2E]" />
+          <span className="w-3.5 h-3.5 rounded-full bg-[#27C93F]" />
+        </div>
+        <span className="text-[11px] text-gray-500 font-mono">manish_profile.sh</span>
+        <div className="w-12" /> {/* Spacer */}
+      </div>
+
+      {/* Tabs */}
+      <div className="flex border-b" style={{ borderColor: '#21262D', backgroundColor: 'rgba(9, 13, 19, 0.6)' }}>
+        {[
+          { id: 'identity', label: 'identity.json' },
+          { id: 'philosophy', label: 'philosophy.sh' },
+          { id: 'interests', label: 'interests.py' }
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id as any)}
+            className="px-4 py-2.5 border-r text-[11px] font-mono transition-colors"
+            style={{
+              borderColor: '#21262D',
+              backgroundColor: activeTab === tab.id ? '#0D1117' : 'transparent',
+              color: activeTab === tab.id ? '#E6EDF3' : '#8B949E'
+            }}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Terminal Body */}
+      <div className="flex-1 p-4 overflow-y-auto leading-relaxed text-left text-gray-300 min-h-[300px]">
+        {activeTab === 'identity' && (
+          <div>
+            <p className="text-gray-500"># Query user profile details</p>
+            <p className="text-[#39D353]">manish@mycelium:~$ <span className="text-white">cat identity.json</span></p>
+            <pre className="mt-2 text-[#7EE787] font-mono text-[11px]">
+{`{
+  "name": "Manish Kumar",
+  "role": "AI Engineer & Data Scientist",
+  "education": "B.Tech CSE, BCE Bhagalpur",
+  "grad_year": 2025,
+  "cgpa": "7.74/10",
+  "location": "Bihar, India",
+  "email": "krmanish2302@gmail.com"
+}`}
+            </pre>
+          </div>
+        )}
+
+        {activeTab === 'philosophy' && (
+          <div>
+            <p className="text-gray-500"># Execute personal motto script</p>
+            <p className="text-[#39D353]">manish@mycelium:~$ <span className="text-white">./philosophy.sh</span></p>
+            <p className="mt-2 text-[#E8C547] font-bold">
+              "Learning by building. Building by solving."
+            </p>
+            <p className="mt-4 text-gray-400 font-body text-xs leading-relaxed">
+              I believe that theory is grounded through code. True understanding lies in building robust pipelines that solve real, messy domain problems—not just clean academic ones.
+            </p>
+          </div>
+        )}
+
+        {activeTab === 'interests' && (
+          <div>
+            <p className="text-gray-500"># Inspect secondary clusters</p>
+            <p className="text-[#39D353]">manish@mycelium:~$ <span className="text-white">python interests.py</span></p>
+            <pre className="mt-2 text-[#79C0FF] font-mono text-[11px]">
+{`class ManishKumar:
+    def __init__(self):
+        self.leadership = "Head Coordinator @ ESROS"
+        self.achievements = "Top 25 Startup Bihar Idea"
+        self.passions = [
+            "Hardware-Software integration",
+            "Bioluminescent networks",
+            "Open-source GenAI tooling"
+        ]`}
+            </pre>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -109,13 +201,12 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Right Column — Skill Graph */}
+        {/* Right Column — Terminal View */}
         <motion.div
           variants={itemVariants}
-          className="min-h-[400px] md:min-h-[500px] rounded-xl border p-4"
-          style={{ borderColor: '#21262D', backgroundColor: 'rgba(13, 17, 23, 0.5)' }}
+          className="min-h-[400px] md:min-h-[500px] rounded-xl overflow-hidden"
         >
-          <SkillGraph />
+          <TerminalView />
         </motion.div>
       </motion.div>
     </section>
